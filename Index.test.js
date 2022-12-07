@@ -32,6 +32,26 @@ test('Creating User',async () => {
  expect(user.email).toBe('janesmitten@gmail.com');
 })
 
-// Read
+// testing associations
+
+describe('model associations')
+
+test('Multiple boards can be added to a User',async() =>{
+        await Sequelize.sync({force: true})
+ const newUser = await User.create({ name: 'Nia', email:'Nia232@gmail.com'});
+ const board1 = await Board.create({type:'All around italy', description:'A taste of Italy',ratings:10});
+ const board2 = await Board.create({ type:'Yummm', description: 'Cool decorations', ratings: 8 });
+        await newUser.multipleBoards([board1,board2]);
+        expect(newUser.length).toBe(2);
+        expect(newUser[0] instanceof Board).toBeTruthy;
+})
+test('A Board can have many Cheeses vice versa', async()=>{
+        await Sequelize.sync({force: true})
+ const board1 = await Board.create({type:'All around italy', description:'A taste of Italy',ratings:10});
+ const board2 = await Board.create({ type:'Yummm', description: 'Cool decorations', ratings: 8 });
+ const cheese1 = await Cheese.create({title: 'Mia Cheese',description: 'Choose your favorite cheeses'}) ;
+ const cheese2 = await Cheese.create({title:'Mozz Delight', description:'Mozzerlla Lovers'});
  
+})
+
 })
