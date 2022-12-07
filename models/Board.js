@@ -1,4 +1,4 @@
-const {sequelize,Sequelize} = require('./db');
+const {sequelize,Sequelize} = require('../db');
 
 
 const Board = sequelize.define('board',{

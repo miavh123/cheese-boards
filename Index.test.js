@@ -1,7 +1,7 @@
 const {sequelize,} = require('./db');
-const {Board}=require('./Index.js');
-const { User} = require('./Index.js');
-const {Cheese}= require ('./Index.js')
+const {Board}=require('./models/Index.js');
+const { User} = require('./models/Index.js');
+const {Cheese}= require ('./models/Index.js')
 
 
 describe ('Board Cheese User models',() => {
@@ -51,7 +51,14 @@ test('A Board can have many Cheeses vice versa', async()=>{
  const board2 = await Board.create({ type:'Yummm', description: 'Cool decorations', ratings: 8 });
  const cheese1 = await Cheese.create({title: 'Mia Cheese',description: 'Choose your favorite cheeses'}) ;
  const cheese2 = await Cheese.create({title:'Mozz Delight', description:'Mozzerlla Lovers'});
- 
+    await board1.addCheese([cheese1,cheese2]);
+    const board1Cheese = await board1.getcheese();
+    expect(board1Cheese.length).toBe(2)
+
+    await board2.addCheese([cheese1,cheese2]);
+    const cheese1Board = await cheese1.getBoard();
+    expect (board1Cheese.length).toBe(1)
+
 })
 
 })
