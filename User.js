@@ -1,4 +1,5 @@
-const { sequelize}  = require('../db');
+const { sequelize}  = require('./db');
+const{Sequelize} = require('sequelize')
 
 
 

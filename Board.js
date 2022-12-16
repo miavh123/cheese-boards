@@ -1,5 +1,5 @@
-const {sequelize,Sequelize} = require('../db');
-
+const {sequelize} = require('./db');
+const {Sequelize} = require('sequelize');
 
 const Board = sequelize.define('board',{
     type: Sequelize.STRING,
